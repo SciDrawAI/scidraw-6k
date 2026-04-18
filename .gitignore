@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+
+# Data (the dataset is hosted on HF and Zenodo, NEVER commit locally)
+*.jsonl
+*.parquet
+*.arrow
+data/
+scidraw6k/
+images/
+stats/
+*.zip
+*.tar
+*.tar.gz
+
+# Images / media (guard against accidental commits of sample files)
+*.png
+*.jpg
+*.jpeg
+*.webp
+
+# Notebook checkpoints
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors / IDE
+.vscode/
+.idea/
+*.swp

@@ -1,0 +1,9 @@
+datasets>=2.18.0
+huggingface_hub>=0.24.0
+pandas>=2.0.0
+pyarrow>=14.0.0
+matplotlib>=3.7.0
+tqdm>=4.66.0
+# optional: only used by examples/retrieval_demo.py
+sentence-transformers>=2.7.0
+numpy>=1.26.0

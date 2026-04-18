@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://huggingface.co/datasets/SciDrawAI/SciDraw-6K/raw/main/schema/metadata_schema.json",
+  "title": "SciDraw-6K metadata row",
+  "description": "Schema for a single record in metadata.jsonl / metadata.parquet of the SciDraw-6K dataset.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "image",
+    "image_ext",
+    "raw_category",
+    "release_category",
+    "category",
+    "prompts",
+    "created_at"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Stable, globally unique image identifier.",
+      "minLength": 1
+    },
+    "image": {
+      "type": "string",
+      "description": "Relative path to the image file inside the released archive, e.g. images/biomedical/gal_xxx.png.",
+      "pattern": "^images/[a-z_]+/.+\\.[A-Za-z0-9]{2,5}$"
+    },
+    "image_ext": {
+      "type": "string",
+      "description": "File extension of the image (lower-case).",
+      "enum": ["png", "jpg", "jpeg", "webp"]
+    },
+    "raw_category": {
+      "type": "string",
+      "description": "Original fine-grained authoring-workflow category."
+    },
+    "release_category": {
+      "type": "string",
+      "description": "Normalized eight-class release category.",
+      "enum": [
+        "ai_system",
+        "biomedical",
+        "chemistry",
+        "electronics",
+        "environment",
+        "materials",
+        "other",
+        "physics"
+      ]
+    },
+    "category": {
+      "type": "string",
+      "description": "Alias of release_category, kept for backwards compatibility with earlier metadata revisions."
+    },
+    "prompts": {
+      "type": "object",
+      "description": "Aligned multilingual prompts. The original field stores the prompt as authored; all other fields are LLM translations.",
+      "additionalProperties": false,
+      "required": ["original", "en", "zh", "ja", "ko", "de", "fr", "es", "pt_br", "zh_tw", "it", "ru"],
+      "properties": {
+        "original": { "type": ["string", "null"] },
+        "en":       { "type": ["string", "null"] },
+        "zh":       { "type": ["string", "null"] },
+        "ja":       { "type": ["string", "null"] },
+        "ko":       { "type": ["string", "null"] },
+        "de":       { "type": ["string", "null"] },
+        "fr":       { "type": ["string", "null"] },
+        "es":       { "type": ["string", "null"] },
+        "pt_br":    { "type": ["string", "null"] },
+        "zh_tw":    { "type": ["string", "null"] },
+        "it":       { "type": ["string", "null"] },
+        "ru":       { "type": ["string", "null"] }
+      }
+    },
+    "gemini_model": {
+      "type": ["string", "null"],
+      "description": "Gemini model identifier (e.g. gemini-2.5-flash-image). Null for rows whose provenance record could not be recovered."
+    },
+    "generation_type": {
+      "type": ["string", "null"],
+      "description": "Generation type reported by the upstream API, e.g. text_to_image."
+    },
+    "created_at": {
+      "type": "string",
+      "description": "Creation timestamp, ISO 8601.",
+      "format": "date-time"
+    },
+    "image_sha256": {
+      "type": "string",
+      "description": "Hex-encoded SHA-256 of the image bytes.",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}
